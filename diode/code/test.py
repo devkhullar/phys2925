@@ -20,8 +20,8 @@ def diode_equation_test(V, I0, n):
     # return I0 * (np.exp(V / (n * Vt)) - 1)
     return np.log10(I0 * ((np.exp((e * V) / (n * k * T)) - 1)))
 
-curr = np.log10(current[3:])
-volt = voltage[3:]
+curr = np.log10(current[2:])
+volt = voltage[2:]
 
 popt, pcov = curve_fit(diode_equation_test, volt, curr)
 print(*popt)
@@ -32,8 +32,8 @@ plt.errorbar(
     curr,
     fmt='o',
     # fill='none'
-    # xerr=np.log10(current_err[3:]).abs(),
-    # yerr=np.log10(voltage_err[3:]).abs()
+    xerr=np.log10(current_err[3:]).abs(),
+    yerr=np.log10(voltage_err[3:]).abs()
 )
 
 plt.plot(
